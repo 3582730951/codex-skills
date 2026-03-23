@@ -1,0 +1,66 @@
+# Portable model policy template.
+# Copy or adapt this file in a repository when you want stable tier aliases
+# even as model families change over time.
+
+version: 1
+
+resolution_order:
+  - repo_aliases
+  - runtime_available_models
+  - fallback_examples
+
+tiers:
+  tier-small:
+    purpose:
+      - retrieval
+      - scan
+      - classification
+      - summarization
+    preferred: []
+    fallback:
+      - gpt-5.4-nano
+      - gpt-5.4-mini
+  tier-medium:
+    purpose:
+      - scoped_coding
+      - unit_tests
+      - narrow_refactors
+      - routine_review
+    preferred: []
+    fallback:
+      - gpt-5.4-mini
+  tier-strong:
+    purpose:
+      - architecture
+      - ambiguity_resolution
+      - security_review
+      - final_acceptance
+    preferred: []
+    fallback:
+      - gpt-5.4
+
+role_defaults:
+  PM: tier-strong
+  Architect: tier-strong
+  Engineer: tier-medium
+  Tester: tier-medium
+  Architecture Reviewer: tier-strong
+  Security Reviewer: tier-strong
+  Integrity Auditor: tier-strong
+
+escalate_when:
+  - ambiguous_root_cause
+  - cross_module_refactor
+  - auth_or_billing_change
+  - public_api_change
+  - conflicting_agent_recommendations
+
+downgrade_when:
+  - read_only_analysis
+  - mechanically_verifiable_output
+  - small_localized_change
+
+report_format:
+  include_tier: true
+  include_resolved_model: true
+  include_resolution_reason: true

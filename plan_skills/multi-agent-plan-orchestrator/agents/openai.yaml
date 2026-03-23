@@ -1,0 +1,6 @@
+interface:
+  display_name: "Multi-Agent Plan Orchestrator"
+  short_description: "Auto-use for planning and /plan mode"
+  default_prompt: "Use $multi-agent-plan-orchestrator for plan drafting, /plan mode, and PM-led multi-agent task decomposition."
+policy:
+  allow_implicit_invocation: true

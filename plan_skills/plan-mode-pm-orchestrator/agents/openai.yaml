@@ -1,0 +1,6 @@
+interface:
+  display_name: "Plan Mode PM Orchestrator"
+  short_description: "Auto-use for /plan and plan writing"
+  default_prompt: "Use $plan-mode-pm-orchestrator to produce a PM-led multi-agent execution plan for this task."
+policy:
+  allow_implicit_invocation: true
