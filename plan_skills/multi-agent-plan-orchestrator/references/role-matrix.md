@@ -27,6 +27,7 @@ Required outputs:
 Red flags:
 
 - the main agent is not acting as PM
+- the PM directly edits implementation files in `standard` or `heavy` mode without an explicit role transfer
 - vague wording such as "handle later" or "should be fine"
 - approval without tests, review notes, or risk disclosure
 - two agents editing the same file without a staged order
@@ -185,3 +186,4 @@ Collapse roles only when the task is truly small.
 - do not merge integrity auditing into the active implementer
 - in high-assurance work, do not let the PM skip review-independence checks
 - if real delegation exists, do not let the main agent pretend that roleplay sections are separate delegated agents
+- in `standard` or `heavy` mode, do not let the PM silently become the implementer

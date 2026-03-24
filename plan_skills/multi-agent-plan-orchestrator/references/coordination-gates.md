@@ -18,6 +18,7 @@ If any of these are missing, stale, or contradictory, downgrade all completion c
 Default to one primary owner per file.
 
 If real delegated agents are available, require real ownership by delegated workers for `standard` and `heavy` plans. A single main-agent roleplay does not satisfy the ownership rule.
+In `standard` and `heavy` plans, the PM must not be the owner of implementation files unless a role transfer is explicitly logged.
 
 Before implementation, require:
 
@@ -50,6 +51,7 @@ Reject work that shows any of these patterns:
 - progress summaries that cannot be traced back to the latest state snapshot
 - bug fixes that mention only the reproduced bug and not the surrounding regression perimeter
 - no written unchanged guarantees for behavior that must remain stable
+- the PM is still labeled PM but is writing the engineer's changes
 
 ## Hardcoding Detection
 
@@ -137,6 +139,7 @@ Call the task complete only after:
 If any gate cannot run, state that clearly and downgrade the completion claim.
 
 If real delegation was available but not used, downgrade the plan to `constrained-single-agent` and lower the assurance claim accordingly.
+If the PM authored implementation changes in `standard` or `heavy` mode without a logged role transfer, fail the plan instead of silently accepting it.
 
 ## Dispute Resolution
 

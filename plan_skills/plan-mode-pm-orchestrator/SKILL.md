@@ -10,6 +10,7 @@ description: "Plan-only PM-led orchestration for Codex planning workflows. Use w
 Use this skill only for planning. The job is to produce a trustworthy execution plan before coding, not to perform the implementation itself.
 
 The `main_agent` always serves as `PM`. Do not delegate PM ownership away from the main agent.
+In `standard` and `heavy` planning, PM is not the default implementer.
 
 ## Trigger Policy
 
@@ -48,6 +49,7 @@ The main agent, acting as PM, must:
 - require an architecture contract summary before finalizing the plan
 - publish an assurance scorecard
 - refuse fake multi-agent roleplay when real delegation exists
+- refuse silent PM takeover of implementation tracks
 
 ## Required Plan Outputs
 
@@ -98,8 +100,10 @@ Do not accept a plan as high-assurance unless:
 - delegated roles map to real workers when the runtime supports them
 - reviewers are independent from implementers
 - the plan states clearly when it is falling back to `constrained-single-agent`
+- the PM is not also the hidden owner of the engineer track
 
 Load [references/delegation-audit.md](references/delegation-audit.md) when checking whether the claimed roster is real.
+Load [references/pm-boundary.md](references/pm-boundary.md) when checking whether PM is drifting into implementation ownership.
 
 ## Scoring Rule
 
@@ -110,6 +114,7 @@ Required dimensions:
 - architecture completeness
 - evidence coverage
 - blast radius coverage
+- PM boundary integrity
 - review independence
 - context integrity
 - delegation integrity when real delegation is available
@@ -122,6 +127,7 @@ Read only what you need:
 
 - [references/plan-output-spec.md](references/plan-output-spec.md): required sections and output expectations
 - [references/delegation-audit.md](references/delegation-audit.md): how to detect fake multi-agent planning
+- [references/pm-boundary.md](references/pm-boundary.md): PM coding firewall and role-transfer rules
 - [references/plan-scorecard.md](references/plan-scorecard.md): plan-only scoring thresholds
 - [references/regression-perimeter.md](references/regression-perimeter.md): blast-radius mapping for bug fixes and behavior changes
 - [references/zh-plan-template.md](references/zh-plan-template.md): Chinese plan template for `/plan` mode

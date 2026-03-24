@@ -34,6 +34,7 @@ State Snapshot:
 - map every track to an owner
 - show which files or modules are at risk of collision
 - show likely collateral damage and unchanged guarantees for bug fixes or behavior changes
+- show that PM is not the hidden owner of implementation tracks
 - show which evidence will be required in execution
 
 ## Failure Conditions
@@ -44,4 +45,5 @@ Reject the plan if:
 - `standard` or `heavy` claims real multi-agent planning without real workers
 - the architecture summary is too vague to derive concrete engineering tracks
 - a bug fix has no regression perimeter or unchanged guarantees
+- PM is still labeled PM but is also the undisclosed implementer
 - quality gates are missing

@@ -18,6 +18,7 @@ Check the delegation claim in this order:
 4. verify each worker has a bounded context package and an owned output
 5. verify reviewers are not the same worker as the implementer
 6. verify the PM is still the main agent and is coordinating rather than impersonating all roles
+7. verify the PM is not also the hidden owner of the engineer track
 
 ## Required Evidence For Real Delegation
 
@@ -40,6 +41,7 @@ Mark delegation as failed if any of these happen:
 - the implementer and reviewer are the same worker
 - reviewers rely on the implementer's own summary instead of primary artifacts
 - the plan claims parallelism but all work is still serialized inside one thread even though real delegation is available
+- the PM remains labeled PM but is also the undisclosed code author
 
 ## Verdicts
 

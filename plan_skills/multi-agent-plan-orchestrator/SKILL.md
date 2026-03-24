@@ -13,6 +13,8 @@ If the platform supports real subagents, spawn them in parallel. If it does not,
 
 The `main_agent` always serves as `PM`. Do not delegate PM ownership away from the main agent.
 
+In `standard` and `heavy` modes, the PM is an orchestrator, not the default implementer.
+
 ## Trigger Policy
 
 Auto-use this skill when the agent is creating a new plan or entering a planning workflow.
@@ -71,6 +73,8 @@ The PM must:
 
 Reject outputs that sound finished but do not show concrete artifacts, verification, or file ownership.
 
+The PM must not quietly drift into implementation work.
+
 ## Build The Agent Roster
 
 Create the roster in this order:
@@ -100,6 +104,34 @@ Do not claim `real-multi-agent` unless the roster maps to actual delegated worke
 Do not claim full multi-agent assurance from a `constrained-single-agent` fallback.
 
 Load [references/delegation-audit.md](references/delegation-audit.md) when verifying whether the claimed roster maps to real delegated workers.
+
+## Enforce The PM Coding Firewall
+
+In `standard` and `heavy` modes, the PM must not directly own implementation code, regression tests, migrations, or other non-PM execution artifacts.
+
+The PM may own only orchestration artifacts such as:
+
+- task charter
+- delegation map
+- decision log
+- state snapshot
+- assurance scorecard
+- acceptance and coordination notes
+
+Treat these as violations:
+
+- the PM editing implementation files while still claiming to be only PM
+- the PM taking over an engineer track without republishing ownership
+- the PM acting as both the active implementer and the final approver
+
+If the PM must temporarily take over because delegation is unavailable or a worker failed, require a `Role Transfer` note in the decision log that states:
+
+- why takeover is necessary
+- which ownership changed
+- whether the execution mode is downgraded
+- who now performs independent review of the PM-authored work
+
+Load [references/pm-boundary.md](references/pm-boundary.md) when checking whether the PM is staying in the PM lane or has triggered a valid takeover protocol.
 
 ## Create Canonical Artifacts First
 
@@ -266,6 +298,7 @@ Score the plan on these dimensions:
 - architecture completeness
 - evidence coverage
 - blast radius coverage
+- PM boundary integrity
 - review independence
 - context integrity
 - task continuity
@@ -319,6 +352,7 @@ Treat these as automatic rejection signals:
 - no ownership for changed files
 - no regression coverage for risky changes
 - bug fixes that validate only the reproduced path and ignore adjacent paths
+- the PM quietly becoming the active coder in `standard` or `heavy` mode
 - architecture that ignores obvious coupling or migration fallout
 - security-sensitive changes shipped without explicit review
 - reviewers approving from summaries instead of primary evidence
@@ -333,6 +367,7 @@ Read only the reference file needed for the current step:
 - [references/model-routing.md](references/model-routing.md): model tier mapping, escalation triggers, and downgrade rules
 - [references/model-policy-template.yaml](references/model-policy-template.yaml): portable alias template for future model updates
 - [references/assurance-scorecard.md](references/assurance-scorecard.md): quantitative gating for architecture quality, review independence, context integrity, and delegation integrity
+- [references/pm-boundary.md](references/pm-boundary.md): PM coding firewall, takeover protocol, and role-boundary checks
 - [references/regression-perimeter.md](references/regression-perimeter.md): blast-radius mapping, unchanged-guarantee checks, and probability-ranked failure scenarios
 - [references/delegation-audit.md](references/delegation-audit.md): concrete audit steps for detecting fake multi-agent roleplay and verifying real delegated ownership
 - [references/coordination-gates.md](references/coordination-gates.md): file ownership policy, anti-hardcoding checks, acceptance criteria, and conflict resolution workflow

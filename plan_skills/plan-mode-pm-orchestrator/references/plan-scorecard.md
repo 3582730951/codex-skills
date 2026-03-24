@@ -9,6 +9,7 @@ Score each from `0` to `5`:
 - architecture completeness
 - evidence coverage
 - blast radius coverage
+- PM boundary integrity
 - review independence
 - context integrity
 - delegation integrity when applicable
@@ -29,3 +30,4 @@ Fail immediately if:
 - the plan has no task charter
 - the architecture summary is missing for non-`tiny` work
 - a bug fix has no regression perimeter or unchanged guarantees
+- the PM is acting as the hidden implementer in `standard` or `heavy`

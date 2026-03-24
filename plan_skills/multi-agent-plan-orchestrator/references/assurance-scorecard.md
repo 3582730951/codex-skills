@@ -43,6 +43,14 @@ Check whether the plan identifies:
 - probable failure scenarios
 - regression checks beyond the reproduced bug
 
+### PM Boundary Integrity
+
+Check whether:
+
+- the main agent stays in the PM role
+- implementation ownership belongs to engineers or other delegated workers
+- any PM takeover is explicit, justified, and independently reviewed
+
 ### Review Independence
 
 Check whether reviewers are blind to peer verdicts and rely on primary artifacts rather than social proof.
@@ -79,6 +87,7 @@ Required dimensions:
 
 - always: architecture completeness, evidence coverage, review independence, context integrity, task continuity
 - add blast radius coverage when fixing a bug or changing behavior
+- add PM boundary integrity in `standard` and `heavy` modes
 - add security coverage when relevant
 - add delegation integrity when the runtime supports real delegation
 
@@ -93,6 +102,7 @@ Fail the plan immediately if any of these are true:
 - the same agent implements and solely approves
 - the plan claims real multi-agent execution without real delegation
 - a bug fix has no written regression perimeter or unchanged guarantees
+- the PM is acting as the active implementer in `standard` or `heavy` mode without an explicit role transfer
 
 ## Reporting Format
 
@@ -103,6 +113,7 @@ Assurance Scorecard:
 - Architecture Completeness: 4.5
 - Evidence Coverage: 4.0
 - Blast Radius Coverage: 4.5
+- PM Boundary Integrity: 5.0
 - Review Independence: 4.5
 - Context Integrity: 4.0
 - Task Continuity: 4.0
