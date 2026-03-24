@@ -33,6 +33,16 @@ Check whether requirements map to:
 - concrete implementation tasks
 - tests or review evidence
 
+### Blast Radius Coverage
+
+Check whether the plan identifies:
+
+- the directly changed path
+- neighboring paths that may be affected
+- unchanged guarantees
+- probable failure scenarios
+- regression checks beyond the reproduced bug
+
 ### Review Independence
 
 Check whether reviewers are blind to peer verdicts and rely on primary artifacts rather than social proof.
@@ -68,6 +78,7 @@ Check whether the claimed multi-agent plan uses real delegated agents when the r
 Required dimensions:
 
 - always: architecture completeness, evidence coverage, review independence, context integrity, task continuity
+- add blast radius coverage when fixing a bug or changing behavior
 - add security coverage when relevant
 - add delegation integrity when the runtime supports real delegation
 
@@ -81,6 +92,7 @@ Fail the plan immediately if any of these are true:
 - hardcoded pass conditions or weakened tests are part of the plan
 - the same agent implements and solely approves
 - the plan claims real multi-agent execution without real delegation
+- a bug fix has no written regression perimeter or unchanged guarantees
 
 ## Reporting Format
 
@@ -90,6 +102,7 @@ Use this structure:
 Assurance Scorecard:
 - Architecture Completeness: 4.5
 - Evidence Coverage: 4.0
+- Blast Radius Coverage: 4.5
 - Review Independence: 4.5
 - Context Integrity: 4.0
 - Task Continuity: 4.0

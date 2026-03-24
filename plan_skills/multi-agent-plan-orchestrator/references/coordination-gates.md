@@ -48,6 +48,8 @@ Reject work that shows any of these patterns:
 - missing requirement-to-change or claim-to-evidence mapping
 - architecture contract missing task-specific coding rules
 - progress summaries that cannot be traced back to the latest state snapshot
+- bug fixes that mention only the reproduced bug and not the surrounding regression perimeter
+- no written unchanged guarantees for behavior that must remain stable
 
 ## Hardcoding Detection
 
@@ -60,6 +62,18 @@ Inspect for:
 - feature flags permanently left in bypass mode
 - contract checks or validators stubbed out only for the changed path
 - planner logic with special cases for demo data while claiming general correctness
+
+## Regression And Blast-Radius Review
+
+Before accepting a bug fix or behavior change, require:
+
+- the directly changed surface
+- adjacent surfaces that rely on the same contract or helper
+- unchanged guarantees
+- probability-ranked failure scenarios
+- regression tests for the reproduced case and nearby cases
+
+Reject completion claims that only cover the originally reported path.
 
 ## Blind Review Protocol
 
@@ -118,6 +132,7 @@ Call the task complete only after:
 - the security reviewer signs off on risky surfaces or explicitly documents residual risk
 - the implementer's claims are matched to evidence
 - review independence is preserved
+- the regression perimeter has been reviewed and nearby breakages have been tested or explicitly accepted as residual risk
 
 If any gate cannot run, state that clearly and downgrade the completion claim.
 

@@ -20,6 +20,7 @@ Required outputs:
 - file ownership map
 - decision log
 - latest state snapshot
+- probable-risk ledger for likely side effects
 - acceptance checklist
 - review packaging instructions
 
@@ -47,6 +48,9 @@ Required outputs:
 - dependency assumptions
 - task-specific coding rules and invariants
 - interface and data contract definitions
+- regression perimeter
+- unchanged guarantees
+- probable failure scenarios
 - rollback or migration notes when relevant
 
 Red flags:
@@ -71,6 +75,7 @@ Required outputs:
 - implementation notes for non-obvious tradeoffs
 - requirement-to-change map
 - claim-to-evidence map for acceptance
+- changed-surface map and adjacent-risk note
 - follow-up items if the owned slice exposes new risks
 
 Red flags:
@@ -94,6 +99,7 @@ Required outputs:
 - test matrix
 - executed checks or a precise statement of what could not be run
 - independent verdict based on primary artifacts
+- regression matrix for adjacent behaviors and likely failure paths
 - defect list or residual-risk note
 
 Red flags:
@@ -116,6 +122,7 @@ Required outputs:
 - review findings
 - accepted constraints and rejected shortcuts
 - contract-completeness verdict
+- blast-radius verdict
 - follow-up recommendations if design debt remains
 
 Red flags:

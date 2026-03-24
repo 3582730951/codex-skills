@@ -16,6 +16,9 @@ Architecture Contract Summary:
 Parallel Tracks:
 File Ownership:
 Dependencies:
+Regression Perimeter:
+Unchanged Guarantees:
+Second-Order Risks:
 Model Routing:
 Context Packages:
 Quality Gates:
@@ -30,6 +33,7 @@ State Snapshot:
 - distinguish real delegated workers from fallback checkpoints
 - map every track to an owner
 - show which files or modules are at risk of collision
+- show likely collateral damage and unchanged guarantees for bug fixes or behavior changes
 - show which evidence will be required in execution
 
 ## Failure Conditions
@@ -39,4 +43,5 @@ Reject the plan if:
 - the PM role is not the main agent
 - `standard` or `heavy` claims real multi-agent planning without real workers
 - the architecture summary is too vague to derive concrete engineering tracks
+- a bug fix has no regression perimeter or unchanged guarantees
 - quality gates are missing

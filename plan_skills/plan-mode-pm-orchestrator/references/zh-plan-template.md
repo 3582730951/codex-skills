@@ -39,6 +39,12 @@ Architecture Contract Summary:
 - invariants
 - task-specific coding rules
 
+Regression Perimeter:
+- changed path
+- adjacent paths
+- unchanged guarantees
+- second-order risks
+
 Parallel Tracks:
 - track / owner / dependencies / outputs
 
@@ -60,6 +66,7 @@ Quality Gates:
 Assurance Scorecard:
 - architecture completeness
 - evidence coverage
+- blast radius coverage
 - review independence
 - context integrity
 - delegation integrity

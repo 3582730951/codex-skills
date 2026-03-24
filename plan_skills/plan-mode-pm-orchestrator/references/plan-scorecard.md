@@ -8,6 +8,7 @@ Score each from `0` to `5`:
 
 - architecture completeness
 - evidence coverage
+- blast radius coverage
 - review independence
 - context integrity
 - delegation integrity when applicable
@@ -27,3 +28,4 @@ Fail immediately if:
 - reviewers are not independent
 - the plan has no task charter
 - the architecture summary is missing for non-`tiny` work
+- a bug fix has no regression perimeter or unchanged guarantees

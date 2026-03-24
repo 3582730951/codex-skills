@@ -63,6 +63,9 @@ Architecture Contract Summary:
 Parallel Tracks:
 File Ownership:
 Dependencies:
+Regression Perimeter:
+Unchanged Guarantees:
+Second-Order Risks:
 Model Routing:
 Context Packages:
 Quality Gates:
@@ -72,6 +75,20 @@ State Snapshot:
 ```
 
 Treat any missing section as a degraded plan.
+
+## Map The Bug-Fix Blast Radius
+
+For bug fixes and behavior changes, require a `Regression Perimeter` before approving the plan.
+
+The plan must identify:
+
+- directly changed logic
+- likely neighboring paths
+- unchanged guarantees
+- second-order risks
+- regression checks beyond the reproduced bug
+
+Load [references/regression-perimeter.md](references/regression-perimeter.md) when writing this section.
 
 ## Delegation And Independence Rules
 
@@ -92,6 +109,7 @@ Required dimensions:
 
 - architecture completeness
 - evidence coverage
+- blast radius coverage
 - review independence
 - context integrity
 - delegation integrity when real delegation is available
@@ -105,6 +123,7 @@ Read only what you need:
 - [references/plan-output-spec.md](references/plan-output-spec.md): required sections and output expectations
 - [references/delegation-audit.md](references/delegation-audit.md): how to detect fake multi-agent planning
 - [references/plan-scorecard.md](references/plan-scorecard.md): plan-only scoring thresholds
+- [references/regression-perimeter.md](references/regression-perimeter.md): blast-radius mapping for bug fixes and behavior changes
 - [references/zh-plan-template.md](references/zh-plan-template.md): Chinese plan template for `/plan` mode
 
 ## Output Style

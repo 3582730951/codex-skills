@@ -132,6 +132,9 @@ Canonical Artifacts:
 Parallel Tracks:
 File Ownership:
 Dependencies:
+Regression Perimeter:
+Unchanged Guarantees:
+Second-Order Risks:
 Model Routing:
 Context Packages:
 Quality Gates:
@@ -170,6 +173,22 @@ Prefer splitting a large file into smaller owned units instead of letting multip
 
 Load [references/coordination-gates.md](references/coordination-gates.md) for conflict handling and acceptance gates.
 
+## Map The Regression Perimeter Before Fixing Bugs
+
+Do not treat the reproduced bug as the whole problem.
+
+For any bug fix or behavior change, require a `Regression Perimeter` before implementation. The perimeter must identify:
+
+- directly changed logic and data paths
+- adjacent callers, callees, and shared helpers
+- unchanged guarantees that must still hold
+- probable failure scenarios and second-order side effects
+- regression checks for the reproduced case and nearby cases
+
+If the plan only proves that the original bug no longer reproduces, the plan is incomplete.
+
+Load [references/regression-perimeter.md](references/regression-perimeter.md) when mapping likely collateral damage, unchanged guarantees, and probability-ranked risks.
+
 ## Require Detailed Design Before Coding
 
 For any `standard` or `heavy` task, the architect must produce an `Architecture Contract` before the engineer writes code.
@@ -180,6 +199,7 @@ The contract must define:
 - interfaces, data contracts, and failure handling
 - file ownership boundaries and extension seams
 - task-specific coding rules, not just generic style advice
+- regression perimeter, unchanged guarantees, and probable failure scenarios
 - validation hooks, test strategy, and rollback or migration notes
 - explicit open questions and who owns each answer
 
@@ -245,6 +265,7 @@ Score the plan on these dimensions:
 
 - architecture completeness
 - evidence coverage
+- blast radius coverage
 - review independence
 - context integrity
 - task continuity
@@ -288,6 +309,7 @@ Require these gates before calling the task done:
 - implementation validated by the tester
 - security-sensitive surfaces reviewed by the security reviewer
 - review independence verified by the PM or integrity auditor
+- likely adjacent regressions reviewed, tested, or explicitly accepted as residual risk
 - PM confirmation that the result solves the stated requirement without hidden shortcuts
 
 Treat these as automatic rejection signals:
@@ -296,6 +318,7 @@ Treat these as automatic rejection signals:
 - disabled checks or weakened assertions to make the task appear complete
 - no ownership for changed files
 - no regression coverage for risky changes
+- bug fixes that validate only the reproduced path and ignore adjacent paths
 - architecture that ignores obvious coupling or migration fallout
 - security-sensitive changes shipped without explicit review
 - reviewers approving from summaries instead of primary evidence
@@ -310,6 +333,7 @@ Read only the reference file needed for the current step:
 - [references/model-routing.md](references/model-routing.md): model tier mapping, escalation triggers, and downgrade rules
 - [references/model-policy-template.yaml](references/model-policy-template.yaml): portable alias template for future model updates
 - [references/assurance-scorecard.md](references/assurance-scorecard.md): quantitative gating for architecture quality, review independence, context integrity, and delegation integrity
+- [references/regression-perimeter.md](references/regression-perimeter.md): blast-radius mapping, unchanged-guarantee checks, and probability-ranked failure scenarios
 - [references/delegation-audit.md](references/delegation-audit.md): concrete audit steps for detecting fake multi-agent roleplay and verifying real delegated ownership
 - [references/coordination-gates.md](references/coordination-gates.md): file ownership policy, anti-hardcoding checks, acceptance criteria, and conflict resolution workflow
 - [references/architecture-contract.md](references/architecture-contract.md): required design sections, coding-rule expectations, and contract completeness checks
