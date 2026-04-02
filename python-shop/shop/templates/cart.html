@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}购物车 | Northstar Atelier{% endblock %}
+
+{% block content %}
+  <section class="page-heading">
+    <p class="eyebrow">Cart Review</p>
+    <h1>购物车</h1>
+    <p>在进入结账前，你可以统一调整数量。订单满 {{ 35000|currency }} 自动免运。</p>
+  </section>
+
+  {% if cart.item_count == 0 %}
+    <section class="empty-state">
+      <h2>你的购物车还是空的。</h2>
+      <p>先回到目录页，把想留下来的物件放进来。</p>
+      <a href="{{ url_for('home') }}" class="button button-dark">返回目录</a>
+    </section>
+  {% else %}
+    <section class="cart-layout">
+      <form class="cart-table" method="post" action="{{ url_for('update_cart') }}">
+        {% for item in cart.line_items %}
+          <article class="cart-row">
+            <img src="{{ item.product.image }}" alt="{{ item.product.name }}">
+            <div class="cart-copy">
+              <p>{{ item.product.category }}</p>
+              <h2>{{ item.product.name }}</h2>
+              <span>{{ item.product.subtitle }}</span>
+            </div>
+            <label class="qty-field">
+              数量
+              <input
+                type="number"
+                min="0"
+                max="8"
+                name="quantity_{{ item.product_slug }}"
+                value="{{ item.quantity }}"
+              >
+            </label>
+            <strong>{{ item.line_total_cents|currency }}</strong>
+            <button
+              type="submit"
+              formaction="{{ url_for('remove_from_cart', slug=item.product_slug) }}"
+              formmethod="post"
+              class="button button-ghost"
+            >
+              移除
+            </button>
+          </article>
+        {% endfor %}
+        <button type="submit" class="button button-light">更新数量</button>
+      </form>
+
+      <aside class="cart-summary">
+        <h2>订单摘要</h2>
+        <div><span>商品小计</span><strong>{{ cart.subtotal_cents|currency }}</strong></div>
+        <div><span>配送费用</span><strong>{{ cart.shipping_cents|currency }}</strong></div>
+        <div class="summary-total"><span>合计</span><strong>{{ cart.grand_total_cents|currency }}</strong></div>
+        {% if cart.free_shipping_gap_cents > 0 %}
+          <p class="summary-note">再购入 {{ cart.free_shipping_gap_cents|currency }} 即可免运。</p>
+        {% else %}
+          <p class="summary-note">你已解锁免运。</p>
+        {% endif %}
+        <a href="{{ url_for('checkout') }}" class="button button-dark summary-button">进入结账</a>
+      </aside>
+    </section>
+  {% endif %}
+{% endblock %}

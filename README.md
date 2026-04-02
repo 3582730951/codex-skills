@@ -10,6 +10,8 @@ plan_skills/
   plan-mode-pm-orchestrator/
   scripts/
     install_plan_skills.py
+plan_skills_dev/
+  enterprise-delivery-orchestrator/
 scripts/
   install_repo_skills.py
 ```
@@ -23,6 +25,7 @@ Use Codex's GitHub skill installer against a single path inside this repo:
 ```text
 install-skill-from-github.py --repo 3582730951/codex-skills --path plan_skills/plan-mode-pm-orchestrator
 install-skill-from-github.py --repo 3582730951/codex-skills --path plan_skills/multi-agent-plan-orchestrator
+install-skill-from-github.py --repo 3582730951/codex-skills --path plan_skills_dev/enterprise-delivery-orchestrator
 ```
 
 Equivalent URL form:
@@ -47,12 +50,14 @@ Install only one group:
 
 ```powershell
 python .\scripts\install_repo_skills.py --group plan_skills
+python .\scripts\install_repo_skills.py --group plan_skills_dev
 ```
 
 Install only selected skills:
 
 ```powershell
 python .\scripts\install_repo_skills.py --skill plan-mode-pm-orchestrator --skill multi-agent-plan-orchestrator
+python .\scripts\install_repo_skills.py --skill enterprise-delivery-orchestrator
 ```
 
 List discovered skills without copying anything:
@@ -97,6 +102,21 @@ python .\plan_skills\scripts\install_plan_skills.py
 
 After installation, restart Codex.
 
+## Install Only `plan_skills_dev`
+
+If users only want the delivery orchestration skill:
+
+```powershell
+git clone --filter=blob:none --no-checkout https://github.com/3582730951/codex-skills.git
+cd codex-skills
+git sparse-checkout init --cone
+git sparse-checkout set plan_skills_dev
+git checkout main
+python .\scripts\install_repo_skills.py --group plan_skills_dev
+```
+
+After installation, restart Codex.
+
 ## Configure Codex
 
 Codex discovers local skills from:
@@ -107,12 +127,15 @@ Codex discovers local skills from:
 Recommended options:
 
 ```powershell
-# Option 1: use the default location
+# Option 1: install planning skills only
 python .\plan_skills\scripts\install_plan_skills.py
 
-# Option 2: set a custom Codex home first
+# Option 2: install delivery skills only
+python .\scripts\install_repo_skills.py --group plan_skills_dev
+
+# Option 3: set a custom Codex home first
 $env:CODEX_HOME = 'D:\CodexHome'
-python .\plan_skills\scripts\install_plan_skills.py
+python .\scripts\install_repo_skills.py --group plan_skills_dev
 ```
 
 Expected installed paths:
@@ -120,6 +143,7 @@ Expected installed paths:
 ```text
 %USERPROFILE%\.codex\skills\plan-mode-pm-orchestrator
 %USERPROFILE%\.codex\skills\multi-agent-plan-orchestrator
+%USERPROFILE%\.codex\skills\enterprise-delivery-orchestrator
 ```
 
 After copying or installing skills:
@@ -136,6 +160,8 @@ Help me write a technical plan for this refactor
 帮我写一个实现计划
 Use $plan-mode-pm-orchestrator to decompose this task
 Use $multi-agent-plan-orchestrator to run PM-led planning and execution
+Use $enterprise-delivery-orchestrator to take this requirement from clarification to release with high-quality code and independent review
+用 $enterprise-delivery-orchestrator 按企业级流程把这个需求从澄清到交付完整落地
 ```
 
 ## Planning Skills
@@ -150,6 +176,15 @@ Use $multi-agent-plan-orchestrator to run PM-led planning and execution
 
 - broader PM-led planning and execution orchestration
 - adds architecture, testing, review, security, context integrity, and anti-fake-multi-agent controls
+
+## Delivery Skills
+
+`plan_skills_dev/enterprise-delivery-orchestrator`
+
+- enterprise-grade requirement-to-product orchestration
+- adds clarification, product definition, API/function contract design, testing evidence, system and UI quality gates, originality checks, and release truthfulness
+- includes repository-aware language adapters for C, C++, Rust, Python, Java, TypeScript, and web frontend work, plus extra controls for kernel/runtime/system-layer work
+- includes runnable helper scripts for greenfield scaffolding, UI evidence capture, code-quality scoring, reviewer package generation, and regulated internal security-product audit/provenance workflows
 
 ## Notes
 

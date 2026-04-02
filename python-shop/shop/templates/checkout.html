@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}结账 | Northstar Atelier{% endblock %}
+
+{% block content %}
+  <section class="page-heading">
+    <p class="eyebrow">Checkout</p>
+    <h1>确认配送信息</h1>
+    <p>这是首版演示站点，因此支付环节以“下单保留库存”方式模拟完成。</p>
+  </section>
+
+  <section class="checkout-layout">
+    <form class="checkout-form" method="post">
+      <label>
+        联系姓名
+        <input type="text" name="customer_name" value="{{ form_data.customer_name }}">
+        {% if errors.customer_name %}<span class="field-error">{{ errors.customer_name }}</span>{% endif %}
+      </label>
+      <label>
+        邮箱
+        <input type="email" name="email" value="{{ form_data.email }}">
+        {% if errors.email %}<span class="field-error">{{ errors.email }}</span>{% endif %}
+      </label>
+      <label>
+        收货地址
+        <textarea name="address" rows="3">{{ form_data.address }}</textarea>
+        {% if errors.address %}<span class="field-error">{{ errors.address }}</span>{% endif %}
+      </label>
+      <label>
+        城市
+        <input type="text" name="city" value="{{ form_data.city }}">
+        {% if errors.city %}<span class="field-error">{{ errors.city }}</span>{% endif %}
+      </label>
+      <label>
+        备注
+        <textarea name="note" rows="4" placeholder="例如：周末收货、放门厅等">{{ form_data.note }}</textarea>
+        {% if errors.note %}<span class="field-error">{{ errors.note }}</span>{% endif %}
+      </label>
+      <button type="submit" class="button button-dark">提交订单</button>
+    </form>
+
+    <aside class="cart-summary">
+      <h2>订单摘要</h2>
+      {% for item in cart.line_items %}
+        <div class="summary-line">
+          <span>{{ item.product_name }} × {{ item.quantity }}</span>
+          <strong>{{ item.line_total_cents|currency }}</strong>
+        </div>
+      {% endfor %}
+      <div><span>商品小计</span><strong>{{ cart.subtotal_cents|currency }}</strong></div>
+      <div><span>配送费用</span><strong>{{ cart.shipping_cents|currency }}</strong></div>
+      <div class="summary-total"><span>合计</span><strong>{{ cart.grand_total_cents|currency }}</strong></div>
+    </aside>
+  </section>
+{% endblock %}

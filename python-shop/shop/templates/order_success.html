@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}订单完成 | Northstar Atelier{% endblock %}
+
+{% block content %}
+  <section class="success-panel">
+    <p class="eyebrow">Order Confirmed</p>
+    <h1>订单 #{{ order.id }} 已创建</h1>
+    <p>
+      谢谢你，{{ order.customer_name }}。我们已经为这份订单预留库存，并将联系邮箱
+      <strong>{{ order.email }}</strong> 作为后续沟通地址。
+    </p>
+    <div class="success-grid">
+      <div><span>配送城市</span><strong>{{ order.city }}</strong></div>
+      <div><span>订单金额</span><strong>{{ order.total_cents|currency }}</strong></div>
+      <div><span>地址</span><strong>{{ order.address }}</strong></div>
+    </div>
+    <div class="success-items">
+      {% for item in items %}
+        <div>
+          <span>{{ item.product_name }} × {{ item.quantity }}</span>
+          <strong>{{ (item.quantity * item.unit_price_cents)|currency }}</strong>
+        </div>
+      {% endfor %}
+    </div>
+    <a href="{{ url_for('home') }}" class="button button-dark">继续逛逛</a>
+  </section>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Northstar Atelier{% endblock %}</title>
+    <meta
+      name="description"
+      content="Northstar Atelier 是一个偏编辑感的家居设计购物网站，提供精选家具、灯具、软装与收藏级家饰。"
+    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a href="{{ url_for('home') }}" class="brand-mark">
+          <span class="brand-kicker">Northstar Atelier</span>
+          <span class="brand-line">Objects For Quiet Rooms</span>
+        </a>
+        <nav class="site-nav">
+          <a href="{{ url_for('home') }}">精选商品</a>
+          <a href="{{ url_for('home', category='Lighting') }}">灯具</a>
+          <a href="{{ url_for('home', category='Seating') }}">座椅</a>
+          <a href="{{ url_for('checkout') }}">结账</a>
+          <a href="{{ url_for('cart') }}" class="cart-pill">购物车 <strong>{{ cart_count }}</strong></a>
+        </nav>
+      </header>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <section class="flash-stack">
+            {% for category, message in messages %}
+              <div class="flash flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          </section>
+        {% endif %}
+      {% endwith %}
+
+      <main>
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </body>
+</html>

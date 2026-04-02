@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Northstar Atelier | 设计家居购物网站{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Season 04 / Interior Edit</p>
+      <h1>为安静空间挑选有秩序感的物件。</h1>
+      <p class="hero-text">
+        我们把购物网站做成一本可浏览的设计刊物。你可以在这里找到偏克制、偏耐看的家具、
+        灯具与软装，不需要从海量模板商品里筛选噪音。
+      </p>
+      <div class="hero-actions">
+        <a href="#catalog" class="button button-dark">浏览本季目录</a>
+        <a href="{{ url_for('home', category='Lighting') }}" class="button button-light">先看灯具系列</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-card">
+        <span>在库系列</span>
+        <strong>{{ category_count }}</strong>
+      </div>
+      <div class="hero-card">
+        <span>精选单品</span>
+        <strong>{{ product_count }}</strong>
+      </div>
+      <div class="hero-note">
+        订单满 {{ 35000|currency }} 自动免运，所有商品均以样板间陈列逻辑编辑呈现。
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-band">
+    {% for product in featured_products %}
+      <article class="featured-card">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+        <div class="featured-meta">
+          <p>{{ product.badge }}</p>
+          <h2>{{ product.name }}</h2>
+          <span>{{ product.subtitle }}</span>
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+
+  <section class="catalog-toolbar" id="catalog">
+    <div>
+      <p class="eyebrow">Catalogue View</p>
+      <h2>按房间气质，而不是关键词堆叠来选品。</h2>
+    </div>
+    <form class="search-form" method="get">
+      <input
+        type="search"
+        name="q"
+        placeholder="搜索名称、分类或描述"
+        value="{{ query }}"
+      >
+      <select name="category">
+        <option value="">全部分类</option>
+        {% for category in categories %}
+          <option value="{{ category }}" {% if active_category == category %}selected{% endif %}>{{ category }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="button button-dark">筛选</button>
+    </form>
+  </section>
+
+  <section class="product-grid">
+    {% for product in products %}
+      <article class="product-card">
+        <a href="{{ url_for('product_detail', slug=product.slug) }}" class="product-image-wrap">
+          <img src="{{ product.image }}" alt="{{ product.name }}">
+          <span class="product-badge">{{ product.badge }}</span>
+        </a>
+        <div class="product-copy">
+          <p class="product-category">{{ product.category }}</p>
+          <h3><a href="{{ url_for('product_detail', slug=product.slug) }}">{{ product.name }}</a></h3>
+          <p>{{ product.subtitle }}</p>
+        </div>
+        <div class="product-footer">
+          <strong>{{ product.price_cents|currency }}</strong>
+          <form method="post" action="{{ url_for('add_to_cart', slug=product.slug) }}">
+            <button type="submit" class="button button-light">加入购物车</button>
+          </form>
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+{% endblock %}

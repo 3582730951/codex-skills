@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} | Northstar Atelier{% endblock %}
+
+{% block content %}
+  <section class="product-hero">
+    <div class="product-visual">
+      <img src="{{ product.image }}" alt="{{ product.name }}">
+    </div>
+    <div class="product-detail">
+      <p class="eyebrow">{{ product.category }} / {{ product.badge }}</p>
+      <h1>{{ product.name }}</h1>
+      <p class="product-lead">{{ product.subtitle }}</p>
+      <strong class="price">{{ product.price_cents|currency }}</strong>
+      <p class="product-description">{{ product.description }}</p>
+
+      <div class="spec-grid">
+        <div><span>材质</span><strong>{{ product.material }}</strong></div>
+        <div><span>尺寸</span><strong>{{ product.dimensions }}</strong></div>
+        <div><span>色系</span><strong>{{ product.palette }}</strong></div>
+      </div>
+
+      <form class="buy-form" method="post" action="{{ url_for('add_to_cart', slug=product.slug) }}">
+        <label>
+          数量
+          <input type="number" name="quantity" value="1" min="1" max="8">
+        </label>
+        <button type="submit" class="button button-dark">加入购物车</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="detail-section">
+    <div>
+      <p class="eyebrow">Styling Note</p>
+      <h2>搭配建议</h2>
+      <p>
+        这件单品适合与低饱和木质、亚麻织物和暖调金属一起出现。我们更推荐把它作为空间里的第二主角，
+        而不是唯一焦点。
+      </p>
+    </div>
+    <div class="related-list">
+      {% for item in related_products %}
+        <a href="{{ url_for('product_detail', slug=item.slug) }}" class="related-card">
+          <img src="{{ item.image }}" alt="{{ item.name }}">
+          <strong>{{ item.name }}</strong>
+          <span>{{ item.price_cents|currency }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}
