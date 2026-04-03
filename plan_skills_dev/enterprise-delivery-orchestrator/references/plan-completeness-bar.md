@@ -48,6 +48,7 @@ Before coding starts, the PM should be able to point to:
 - `Execution Contract`
 - `Capability Routing Table`
 - `Delegation Template Table`
+- `Spawn Agent Template Table`
 - `Plan Coverage Matrix`
 
 Use `scripts/score_plan_quality.py` and `scripts/check_capability_routing.py` for a mechanical first pass.

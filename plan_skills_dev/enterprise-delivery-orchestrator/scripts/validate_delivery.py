@@ -19,6 +19,7 @@ REQUIRED_MARKERS = {
     "execution_contract": "Execution Contract:",
     "capability_routing_table": "Capability Routing Table:",
     "delegation_template_table": "Delegation Template Table:",
+    "spawn_agent_template_table": "Spawn Agent Template Table:",
     "plan_coverage_matrix": "Plan Coverage Matrix:",
     "execution_ledger": "Execution Ledger:",
     "requirement_to_change_map": "Requirement-to-Change Map:",

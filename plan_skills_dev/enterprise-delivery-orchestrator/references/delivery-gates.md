@@ -24,6 +24,7 @@ Fail immediately if any of these are true:
 - missing `Execution Contract`
 - missing `Capability Routing Table`
 - missing `Delegation Template Table`
+- missing `Spawn Agent Template Table`
 - missing `Plan Coverage Matrix`
 - missing `Execution Ledger`
 - missing `Test Matrix + Evidence Log`
@@ -77,6 +78,7 @@ Approval requires:
 - for regulated internal security products: authorization, provenance, and audit annotation evidence
 - a locked plan and execution log that can be audited
 - capability routing that matches the criticality of the work
+- runtime-facing spawn templates for delegated work
 
 ## Complete Product Gate
 
@@ -109,6 +111,7 @@ Use:
 - `scripts/generate_execution_control.py` to create the execution lock artifacts
 - `scripts/generate_capability_routing.py` to create the capability-routing artifact
 - `scripts/generate_delegation_templates.py` to create reusable spawn templates
+- `scripts/generate_spawn_agent_templates.py` to create runtime-facing spawn-agent payload templates
 - `scripts/generate_review_prompts.py` to create independent reviewer asks
 - `scripts/generate_verdict_template.py` to normalize reviewer outputs
 - `scripts/generate_threat_model.py` to create a first-pass threat review
@@ -118,6 +121,7 @@ Use:
 - `scripts/scan_audit_annotations.py` to verify required comment tags in sensitive files
 - `scripts/score_plan_quality.py` to reject shallow plans before coding
 - `scripts/check_capability_routing.py` to reject weak routing on critical work
+- `scripts/check_spawn_agent_templates.py` to validate runtime-facing spawn-agent templates
 - `scripts/check_execution_alignment.py` to detect drift from the locked plan
 
 ## Rework Protocol

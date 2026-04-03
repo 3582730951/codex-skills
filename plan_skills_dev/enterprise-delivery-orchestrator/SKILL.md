@@ -66,6 +66,7 @@ Always produce or update these artifacts:
 - `Execution Contract`
 - `Capability Routing Table`
 - `Delegation Template Table`
+- `Spawn Agent Template Table`
 - `Plan Coverage Matrix`
 - `Execution Ledger`
 - `Requirement-to-Change Map`
@@ -113,6 +114,7 @@ Read only the references needed for the task:
 - [references/replan-protocol.md](references/replan-protocol.md): when and how to stop and replan
 - [references/capability-routing.md](references/capability-routing.md): which work must use strongest models and strongest reasoning
 - [references/escalation-and-delegation.md](references/escalation-and-delegation.md): when to escalate and how to keep reusable spawn templates
+- [references/runtime-spawn-integration.md](references/runtime-spawn-integration.md): how to generate actual runtime-facing `spawn_agent` templates
 - [references/api-contract-bar.md](references/api-contract-bar.md): API and function-boundary rules
 - [references/readability-rubric.md](references/readability-rubric.md): code-quality scoring and veto items
 - [references/anti-laziness.md](references/anti-laziness.md): reject fake progress, hardcoding, and unverifiable claims
@@ -135,9 +137,11 @@ Use the scripts when execution needs repeatable structure:
 - `scripts/generate_execution_control.py`: create the locked execution artifacts
 - `scripts/generate_capability_routing.py`: create the capability-routing artifact
 - `scripts/generate_delegation_templates.py`: create reusable role and spawn templates
+- `scripts/generate_spawn_agent_templates.py`: create runtime-facing spawn-agent payload templates
 - `scripts/validate_delivery.py`: validate that artifact bundles satisfy required gates
 - `scripts/score_plan_quality.py`: score whether the plan is complete enough to start coding
 - `scripts/check_capability_routing.py`: verify that critical work is not assigned to weak tiers
+- `scripts/check_spawn_agent_templates.py`: verify that runtime-facing spawn-agent templates match routing and templates
 - `scripts/check_execution_alignment.py`: verify that execution stayed aligned to the locked plan
 - `scripts/build_review_package.py`: generate a standard review package markdown file
 - `scripts/capture_ui_evidence.py`: capture desktop/tablet/mobile screenshots plus Lighthouse metrics
@@ -203,10 +207,12 @@ Before coding on non-trivial work:
 1. create or update the `Execution Contract`
 2. create the `Capability Routing Table`
 3. create the `Delegation Template Table`
-4. create the `Plan Coverage Matrix`
-5. run `scripts/score_plan_quality.py`
-6. run `scripts/check_capability_routing.py`
-7. do not code if any plan dimension is below `4` or critical work is routed to weak tiers
+4. create the `Spawn Agent Template Table`
+5. create the `Plan Coverage Matrix`
+6. run `scripts/score_plan_quality.py`
+7. run `scripts/check_capability_routing.py`
+8. run `scripts/check_spawn_agent_templates.py`
+9. do not code if any plan dimension is below `4` or critical work is routed to weak tiers
 
 During implementation:
 

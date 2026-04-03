@@ -20,6 +20,7 @@ SECTION_MARKERS = [
     "Execution Contract:",
     "Capability Routing Table:",
     "Delegation Template Table:",
+    "Spawn Agent Template Table:",
     "Plan Coverage Matrix:",
     "Execution Ledger:",
 ]
@@ -95,6 +96,7 @@ def analyze(text: str) -> tuple[dict[str, float], list[str]]:
             "Execution Contract:",
             "Capability Routing Table:",
             "Delegation Template Table:",
+            "Spawn Agent Template Table:",
             "- release_slice:",
             "- plan_lock_version:",
             "- ordered_steps:",

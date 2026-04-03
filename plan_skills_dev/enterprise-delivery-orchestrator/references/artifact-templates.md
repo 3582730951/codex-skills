@@ -140,10 +140,25 @@ Delegation Template Table:
   agent_type:
   model:
   reasoning_effort:
+  fork_context:
   execution_preference:
   use_when:
   keep_local_if_unavailable:
   notes:
+```
+
+## Spawn Agent Template Table
+
+```text
+Spawn Agent Template Table:
+- work_item_id:
+  work_class:
+  template_id:
+  spawn_mode:
+  should_spawn_by_default:
+  fallback_policy:
+  spawn_agent_json:
+  message_template: |
 ```
 
 ## Plan Coverage Matrix

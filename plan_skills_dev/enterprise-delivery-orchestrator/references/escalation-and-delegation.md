@@ -15,6 +15,7 @@ Do not let a fast worker keep iterating on planning, architecture, coding, secur
 
 - `Capability Routing Table`
 - `Delegation Template Table`
+- `Spawn Agent Template Table`
 - `Execution Ledger`
 
 ## Stall Policy

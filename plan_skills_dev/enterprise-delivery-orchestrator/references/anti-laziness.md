@@ -26,6 +26,7 @@ Use this file to detect fake progress and lazy implementation patterns.
 - giving critical work to a weak model tier just because it is cheaper or faster
 - retrying the same low-tier worker on a critical blocker instead of escalating
 - delegating critical work without an explicit reusable template for model and reasoning settings
+- claiming the runtime is "ready for multi-agent" with no actual `spawn_agent` templates
 
 ## Map Rules
 

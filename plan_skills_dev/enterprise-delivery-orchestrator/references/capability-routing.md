@@ -134,3 +134,5 @@ At minimum define templates for:
 - packaging
 
 Use `scripts/generate_delegation_templates.py` to create the table.
+
+Use `scripts/generate_spawn_agent_templates.py` to turn routing plus delegation templates into actual runtime handoff artifacts.

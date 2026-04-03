@@ -57,6 +57,7 @@ Outputs:
 - initial `Execution Contract` with a release slice and replan triggers
 - initial `Capability Routing Table`
 - initial `Delegation Template Table`
+- initial `Spawn Agent Template Table` when delegated execution is possible
 
 Block implementation if any unresolved ambiguity can change contracts, security, architecture, or stack choice.
 
