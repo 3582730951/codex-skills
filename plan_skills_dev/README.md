@@ -14,6 +14,7 @@ Delivery-focused Codex skills.
 - includes audit, authorization, provenance, and internal-source workflows for regulated security products and proprietary protection code
 - includes locked-plan controls so agents have to prove plan completeness and execution alignment
 - includes capability-routing controls so planning, coding, and security review stay on strongest models and strongest reasoning
+- includes escalation and delegation-template controls so weak workers cannot loop on critical blockers
 
 ## Helper Scripts
 
@@ -23,6 +24,7 @@ Inside `enterprise-delivery-orchestrator/scripts/`:
 - `bootstrap_system_tool.py`
 - `generate_execution_control.py`
 - `generate_capability_routing.py`
+- `generate_delegation_templates.py`
 - `validate_delivery.py`
 - `score_plan_quality.py`
 - `check_capability_routing.py`

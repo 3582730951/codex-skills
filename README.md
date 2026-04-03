@@ -187,6 +187,7 @@ Use $enterprise-delivery-orchestrator to take this requirement from clarificatio
 - includes runnable helper scripts for greenfield scaffolding, UI evidence capture, code-quality scoring, reviewer package generation, and regulated internal security-product audit/provenance workflows
 - includes locked-plan execution controls to reduce shallow plans and implementation drift
 - includes capability-routing controls to keep critical work on stronger models and stronger reasoning
+- includes escalation and delegation-template controls so weak workers are forced upward on critical blockers
 
 ## Notes
 

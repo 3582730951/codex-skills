@@ -14,6 +14,7 @@ Do not treat the plan as background prose. Treat it as a lock:
 
 - `Execution Contract`
 - `Capability Routing Table`
+- `Delegation Template Table`
 - `Plan Coverage Matrix`
 - `Execution Ledger`
 

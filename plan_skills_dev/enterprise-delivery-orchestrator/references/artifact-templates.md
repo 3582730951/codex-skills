@@ -121,7 +121,28 @@ Capability Routing Table:
   preferred_model:
   reasoning_effort:
   downgrade_allowed:
+  execution_preference:
+  stall_attempt_limit:
+  escalation_target_tier:
+  escalation_target_model:
+  escalation_target_reasoning:
   escalation_trigger:
+  delegation_template_id:
+  notes:
+```
+
+## Delegation Template Table
+
+```text
+Delegation Template Table:
+- template_id:
+  owner_role:
+  agent_type:
+  model:
+  reasoning_effort:
+  execution_preference:
+  use_when:
+  keep_local_if_unavailable:
   notes:
 ```
 

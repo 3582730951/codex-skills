@@ -65,6 +65,7 @@ Always produce or update these artifacts:
 - `Function Boundary Table`
 - `Execution Contract`
 - `Capability Routing Table`
+- `Delegation Template Table`
 - `Plan Coverage Matrix`
 - `Execution Ledger`
 - `Requirement-to-Change Map`
@@ -111,6 +112,7 @@ Read only the references needed for the task:
 - [references/execution-discipline.md](references/execution-discipline.md): how to keep implementation aligned to locked plan steps
 - [references/replan-protocol.md](references/replan-protocol.md): when and how to stop and replan
 - [references/capability-routing.md](references/capability-routing.md): which work must use strongest models and strongest reasoning
+- [references/escalation-and-delegation.md](references/escalation-and-delegation.md): when to escalate and how to keep reusable spawn templates
 - [references/api-contract-bar.md](references/api-contract-bar.md): API and function-boundary rules
 - [references/readability-rubric.md](references/readability-rubric.md): code-quality scoring and veto items
 - [references/anti-laziness.md](references/anti-laziness.md): reject fake progress, hardcoding, and unverifiable claims
@@ -132,6 +134,7 @@ Use the scripts when execution needs repeatable structure:
 - `scripts/bootstrap_system_tool.py`: create bounded defensive system-tool scaffolds
 - `scripts/generate_execution_control.py`: create the locked execution artifacts
 - `scripts/generate_capability_routing.py`: create the capability-routing artifact
+- `scripts/generate_delegation_templates.py`: create reusable role and spawn templates
 - `scripts/validate_delivery.py`: validate that artifact bundles satisfy required gates
 - `scripts/score_plan_quality.py`: score whether the plan is complete enough to start coding
 - `scripts/check_capability_routing.py`: verify that critical work is not assigned to weak tiers
@@ -199,10 +202,11 @@ Before coding on non-trivial work:
 
 1. create or update the `Execution Contract`
 2. create the `Capability Routing Table`
-3. create the `Plan Coverage Matrix`
-4. run `scripts/score_plan_quality.py`
-5. run `scripts/check_capability_routing.py`
-6. do not code if any plan dimension is below `4` or critical work is routed to weak tiers
+3. create the `Delegation Template Table`
+4. create the `Plan Coverage Matrix`
+5. run `scripts/score_plan_quality.py`
+6. run `scripts/check_capability_routing.py`
+7. do not code if any plan dimension is below `4` or critical work is routed to weak tiers
 
 During implementation:
 

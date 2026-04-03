@@ -35,6 +35,17 @@ LIGHT_CLASSES = {
     "screenshot_capture",
 }
 
+STRICT_XHIGH_CLASSES = {
+    "pm_planning",
+    "architecture",
+    "security_review",
+    "systems_review",
+    "release_verdict",
+}
+
+CRITICAL_EXECUTION_PREFERENCES = {"main_agent", "delegated_frontier", "main_agent_or_frontier"}
+LIGHT_EXECUTION_PREFERENCES = {"delegated_fast", "delegated_standard", "main_agent"}
+
 
 def collect_text(root: Path) -> str:
     chunks: list[str] = []
@@ -103,7 +114,13 @@ def main() -> int:
         tier = entry.get("required_model_tier", "")
         reasoning = entry.get("reasoning_effort", "")
         downgrade = entry.get("downgrade_allowed", "")
+        execution_preference = entry.get("execution_preference", "")
+        stall_attempt_limit = entry.get("stall_attempt_limit", "")
+        escalation_target_tier = entry.get("escalation_target_tier", "")
+        escalation_target_model = entry.get("escalation_target_model", "")
+        escalation_target_reasoning = entry.get("escalation_target_reasoning", "")
         escalation = entry.get("escalation_trigger", "")
+        delegation_template_id = entry.get("delegation_template_id", "")
 
         if not work_class:
             findings.append(f"{work_id}: work_class is missing")
@@ -114,18 +131,42 @@ def main() -> int:
                 findings.append(f"{work_id}: critical work class {work_class} must use frontier tier")
             if reasoning not in {"high", "xhigh"}:
                 findings.append(f"{work_id}: critical work class {work_class} must use high or xhigh reasoning")
+            if work_class in STRICT_XHIGH_CLASSES and reasoning != "xhigh":
+                findings.append(f"{work_id}: work class {work_class} must use xhigh reasoning")
             if downgrade != "no":
                 findings.append(f"{work_id}: critical work class {work_class} must not allow downgrade")
+            if execution_preference not in CRITICAL_EXECUTION_PREFERENCES:
+                findings.append(f"{work_id}: critical work class {work_class} must stay local or use delegated_frontier")
+            if stall_attempt_limit != "2":
+                findings.append(f"{work_id}: critical work class {work_class} must have stall_attempt_limit 2")
+            if escalation_target_tier != "frontier":
+                findings.append(f"{work_id}: critical work class {work_class} must escalate to frontier tier")
+            if not escalation_target_model:
+                findings.append(f"{work_id}: escalation_target_model is missing")
+            if work_class in STRICT_XHIGH_CLASSES and escalation_target_reasoning != "xhigh":
+                findings.append(f"{work_id}: work class {work_class} must escalate with xhigh reasoning")
+            if work_class not in STRICT_XHIGH_CLASSES and escalation_target_reasoning not in {"high", "xhigh"}:
+                findings.append(f"{work_id}: critical work class {work_class} must escalate with high or xhigh reasoning")
         elif work_class in LIGHT_CLASSES:
             if tier not in {"fast", "standard"}:
                 findings.append(f"{work_id}: light work class {work_class} should use fast or standard tier")
             if reasoning not in {"low", "medium"}:
                 findings.append(f"{work_id}: light work class {work_class} should use low or medium reasoning")
+            if execution_preference not in LIGHT_EXECUTION_PREFERENCES:
+                findings.append(f"{work_id}: light work class {work_class} should use a light execution preference")
+            if not stall_attempt_limit:
+                findings.append(f"{work_id}: stall_attempt_limit is missing")
+            if escalation_target_tier not in {"standard", "frontier"}:
+                findings.append(f"{work_id}: light work class {work_class} should escalate to standard or frontier")
+            if escalation_target_reasoning not in {"medium", "high", "xhigh"}:
+                findings.append(f"{work_id}: light work class {work_class} has invalid escalation reasoning")
         else:
             findings.append(f"{work_id}: unknown work class {work_class}")
 
         if not escalation:
             findings.append(f"{work_id}: escalation_trigger is missing")
+        if not delegation_template_id:
+            findings.append(f"{work_id}: delegation_template_id is missing")
 
     if args.format == "json":
         print(

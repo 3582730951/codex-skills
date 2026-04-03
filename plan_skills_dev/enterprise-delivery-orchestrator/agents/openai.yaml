@@ -1,6 +1,6 @@
 interface:
   display_name: "Enterprise Delivery Orchestrator"
-  short_description: "Auto-use for locked-plan delivery with capability routing, evidence, and drift control"
-  default_prompt: "Use $enterprise-delivery-orchestrator to take this requirement from clarification to architecture, locked execution plan, capability routing, implementation, testing, and release with repository-aware code quality, API/function contracts, originality checks, strong-model routing for critical work, drift control, and independent review. 用 $enterprise-delivery-orchestrator 按企业级流程把这个需求从澄清、产品定义、架构、锁定执行计划、能力路由、编码、测试到交付完整落地，并防止关键工作落到低配模型。"
+  short_description: "Auto-use for locked-plan delivery with capability routing, escalation, and drift control"
+  default_prompt: "Use $enterprise-delivery-orchestrator to take this requirement from clarification to architecture, locked execution plan, capability routing, delegation templates, implementation, testing, and release with repository-aware code quality, API/function contracts, originality checks, strong-model routing for critical work, automatic escalation on stalled weak workers, drift control, and independent review. 用 $enterprise-delivery-orchestrator 按企业级流程把这个需求从澄清、产品定义、架构、锁定执行计划、能力路由、委派模板、编码、测试到交付完整落地，并在低配模型卡住时自动升级。"
 policy:
   allow_implicit_invocation: true

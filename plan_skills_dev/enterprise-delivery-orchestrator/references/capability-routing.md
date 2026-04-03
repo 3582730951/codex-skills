@@ -30,6 +30,9 @@ It should name:
 - preferred model or family
 - required reasoning effort
 - whether downgrade is allowed
+- execution preference
+- stall attempt limit
+- escalation target
 - stall escalation trigger
 
 ## Work-Class Routing Rules
@@ -112,3 +115,22 @@ Downgrade is forbidden for:
 - release verdict
 
 Downgrade is acceptable only for explicitly light work classes and only when the result is still checked by a stronger tier before approval.
+
+## Delegation Templates
+
+Create a `Delegation Template Table` for reusable spawn settings.
+
+At minimum define templates for:
+
+- PM
+- product
+- architect
+- coding
+- security review
+- systems review
+- code review / UI review
+- retrieval
+- test execution
+- packaging
+
+Use `scripts/generate_delegation_templates.py` to create the table.

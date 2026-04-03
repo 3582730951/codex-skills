@@ -23,6 +23,7 @@ Fail immediately if any of these are true:
 - missing `API Contract Table` or `Function Boundary Table` when boundaries changed
 - missing `Execution Contract`
 - missing `Capability Routing Table`
+- missing `Delegation Template Table`
 - missing `Plan Coverage Matrix`
 - missing `Execution Ledger`
 - missing `Test Matrix + Evidence Log`
@@ -107,6 +108,7 @@ Use:
 - `scripts/build_review_package.py` to standardize the package
 - `scripts/generate_execution_control.py` to create the execution lock artifacts
 - `scripts/generate_capability_routing.py` to create the capability-routing artifact
+- `scripts/generate_delegation_templates.py` to create reusable spawn templates
 - `scripts/generate_review_prompts.py` to create independent reviewer asks
 - `scripts/generate_verdict_template.py` to normalize reviewer outputs
 - `scripts/generate_threat_model.py` to create a first-pass threat review

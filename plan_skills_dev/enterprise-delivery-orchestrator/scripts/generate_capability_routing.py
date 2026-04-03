@@ -8,25 +8,25 @@ from pathlib import Path
 
 
 WORK_CLASS_POLICY = {
-    "pm_planning": ("frontier", "gpt-5.4", "xhigh", "no", "repeat blocker twice"),
-    "product_definition": ("frontier", "gpt-5.4", "high", "no", "output remains vague after one pass"),
-    "architecture": ("frontier", "gpt-5.4", "xhigh", "no", "contract gap appears"),
-    "core_coding": ("frontier", "gpt-5.4", "xhigh", "no", "same bug or design confusion twice"),
-    "bounded_coding": ("frontier", "gpt-5.4", "high", "no", "same bug or design confusion twice"),
-    "complex_debugging": ("frontier", "gpt-5.4", "xhigh", "no", "same blocker twice"),
-    "migration_refactor": ("frontier", "gpt-5.4", "xhigh", "no", "behavioral uncertainty appears"),
-    "test_design": ("frontier", "gpt-5.4", "high", "no", "coverage gaps remain unclear"),
-    "code_review": ("frontier", "gpt-5.4", "high", "no", "review findings stay ambiguous"),
-    "ui_design_review": ("frontier", "gpt-5.4", "xhigh", "no", "visual direction stays generic"),
-    "security_review": ("frontier", "gpt-5.4", "xhigh", "no", "threat boundary unclear"),
-    "systems_review": ("frontier", "gpt-5.4", "xhigh", "no", "lifetime or concurrency risk appears"),
-    "release_verdict": ("frontier", "gpt-5.4", "xhigh", "no", "evidence or risk is incomplete"),
-    "repo_retrieval": ("fast", "gpt-5.1-codex-mini", "medium", "yes", "missing context after one pass"),
-    "doc_extraction": ("fast", "gpt-5.1-codex-mini", "medium", "yes", "missing context after one pass"),
-    "artifact_packaging": ("fast", "gpt-5.1-codex-mini", "low", "yes", "packaging mismatch"),
-    "test_execution": ("fast", "gpt-5.1-codex-mini", "medium", "yes", "test output unclear"),
-    "smoke_test": ("fast", "gpt-5.1-codex-mini", "low", "yes", "smoke result unclear"),
-    "screenshot_capture": ("fast", "gpt-5.1-codex-mini", "low", "yes", "capture missing required view"),
+    "pm_planning": ("frontier", "gpt-5.4", "xhigh", "no", "main_agent_or_frontier", "2", "frontier", "gpt-5.4", "xhigh", "repeat blocker twice", "PM-FRONTIER-XHIGH"),
+    "product_definition": ("frontier", "gpt-5.4", "high", "no", "main_agent_or_frontier", "2", "frontier", "gpt-5.4", "xhigh", "output remains vague after one pass", "PRODUCT-FRONTIER-HIGH"),
+    "architecture": ("frontier", "gpt-5.4", "xhigh", "no", "main_agent_or_frontier", "2", "frontier", "gpt-5.4", "xhigh", "contract gap appears", "ARCH-FRONTIER-XHIGH"),
+    "core_coding": ("frontier", "gpt-5.4", "xhigh", "no", "delegated_frontier", "2", "frontier", "gpt-5.4", "xhigh", "same bug or design confusion twice", "CODE-FRONTIER-XHIGH"),
+    "bounded_coding": ("frontier", "gpt-5.4", "high", "no", "delegated_frontier", "2", "frontier", "gpt-5.4", "xhigh", "same bug or design confusion twice", "CODE-FRONTIER-XHIGH"),
+    "complex_debugging": ("frontier", "gpt-5.4", "xhigh", "no", "delegated_frontier", "2", "frontier", "gpt-5.4", "xhigh", "same blocker twice", "CODE-FRONTIER-XHIGH"),
+    "migration_refactor": ("frontier", "gpt-5.4", "xhigh", "no", "delegated_frontier", "2", "frontier", "gpt-5.4", "xhigh", "behavioral uncertainty appears", "ARCH-FRONTIER-XHIGH"),
+    "test_design": ("frontier", "gpt-5.4", "high", "no", "main_agent_or_frontier", "2", "frontier", "gpt-5.4", "high", "coverage gaps remain unclear", "REVIEW-FRONTIER-HIGH"),
+    "code_review": ("frontier", "gpt-5.4", "high", "no", "delegated_frontier", "2", "frontier", "gpt-5.4", "high", "review findings stay ambiguous", "REVIEW-FRONTIER-HIGH"),
+    "ui_design_review": ("frontier", "gpt-5.4", "xhigh", "no", "delegated_frontier", "2", "frontier", "gpt-5.4", "xhigh", "visual direction stays generic", "REVIEW-FRONTIER-HIGH"),
+    "security_review": ("frontier", "gpt-5.4", "xhigh", "no", "main_agent_or_frontier", "2", "frontier", "gpt-5.4", "xhigh", "threat boundary unclear", "SEC-FRONTIER-XHIGH"),
+    "systems_review": ("frontier", "gpt-5.4", "xhigh", "no", "main_agent_or_frontier", "2", "frontier", "gpt-5.4", "xhigh", "lifetime or concurrency risk appears", "SYS-FRONTIER-XHIGH"),
+    "release_verdict": ("frontier", "gpt-5.4", "xhigh", "no", "main_agent_or_frontier", "2", "frontier", "gpt-5.4", "xhigh", "evidence or risk is incomplete", "PM-FRONTIER-XHIGH"),
+    "repo_retrieval": ("fast", "gpt-5.1-codex-mini", "medium", "yes", "delegated_fast", "2", "standard", "gpt-5.2", "high", "missing context after one pass", "RETRIEVAL-FAST-MEDIUM"),
+    "doc_extraction": ("fast", "gpt-5.1-codex-mini", "medium", "yes", "delegated_fast", "2", "standard", "gpt-5.2", "high", "missing context after one pass", "RETRIEVAL-FAST-MEDIUM"),
+    "artifact_packaging": ("fast", "gpt-5.1-codex-mini", "low", "yes", "delegated_fast", "2", "standard", "gpt-5.2", "medium", "packaging mismatch", "PACKAGING-FAST-LOW"),
+    "test_execution": ("fast", "gpt-5.1-codex-mini", "medium", "yes", "delegated_fast", "2", "standard", "gpt-5.2", "high", "test output unclear", "TEST-EXEC-FAST-MEDIUM"),
+    "smoke_test": ("fast", "gpt-5.1-codex-mini", "low", "yes", "delegated_fast", "2", "standard", "gpt-5.2", "medium", "smoke result unclear", "TEST-EXEC-FAST-MEDIUM"),
+    "screenshot_capture": ("fast", "gpt-5.1-codex-mini", "low", "yes", "delegated_fast", "2", "standard", "gpt-5.2", "medium", "capture missing required view", "PACKAGING-FAST-LOW"),
 }
 
 
@@ -56,7 +56,19 @@ def main() -> int:
         work_id, work_class, owner_role = parse_item(item)
         if work_class not in WORK_CLASS_POLICY:
             raise ValueError(f"Unknown work class: {work_class}")
-        tier, model, reasoning, downgrade, escalation = WORK_CLASS_POLICY[work_class]
+        (
+            tier,
+            model,
+            reasoning,
+            downgrade,
+            execution_preference,
+            stall_attempt_limit,
+            escalation_target_tier,
+            escalation_target_model,
+            escalation_target_reasoning,
+            escalation,
+            delegation_template_id,
+        ) = WORK_CLASS_POLICY[work_class]
         entries.append(
             [
                 f"- work_item_id: {work_id}",
@@ -66,7 +78,13 @@ def main() -> int:
                 f"  preferred_model: {model}",
                 f"  reasoning_effort: {reasoning}",
                 f"  downgrade_allowed: {downgrade}",
+                f"  execution_preference: {execution_preference}",
+                f"  stall_attempt_limit: {stall_attempt_limit}",
+                f"  escalation_target_tier: {escalation_target_tier}",
+                f"  escalation_target_model: {escalation_target_model}",
+                f"  escalation_target_reasoning: {escalation_target_reasoning}",
                 f"  escalation_trigger: {escalation}",
+                f"  delegation_template_id: {delegation_template_id}",
                 "  notes:",
             ]
         )
@@ -80,7 +98,13 @@ def main() -> int:
             "  preferred_model:",
             "  reasoning_effort:",
             "  downgrade_allowed:",
+            "  execution_preference:",
+            "  stall_attempt_limit:",
+            "  escalation_target_tier:",
+            "  escalation_target_model:",
+            "  escalation_target_reasoning:",
             "  escalation_trigger:",
+            "  delegation_template_id:",
             "  notes:",
         ]]
 

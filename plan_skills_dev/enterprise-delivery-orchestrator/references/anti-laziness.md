@@ -25,6 +25,7 @@ Use this file to detect fake progress and lazy implementation patterns.
 - coding against a vague plan with no release slice or locked steps
 - giving critical work to a weak model tier just because it is cheaper or faster
 - retrying the same low-tier worker on a critical blocker instead of escalating
+- delegating critical work without an explicit reusable template for model and reasoning settings
 
 ## Map Rules
 

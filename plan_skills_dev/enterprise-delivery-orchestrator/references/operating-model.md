@@ -56,6 +56,7 @@ Outputs:
 - logged assumptions for low-impact gaps only
 - initial `Execution Contract` with a release slice and replan triggers
 - initial `Capability Routing Table`
+- initial `Delegation Template Table`
 
 Block implementation if any unresolved ambiguity can change contracts, security, architecture, or stack choice.
 
