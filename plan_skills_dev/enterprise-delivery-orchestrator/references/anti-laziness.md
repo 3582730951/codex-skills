@@ -21,6 +21,10 @@ Use this file to detect fake progress and lazy implementation patterns.
 - UI made from the same default SaaS pattern regardless of product
 - internal source copied or referenced with no provenance trail
 - privileged or submission-sensitive code changed with no authorization or audit-note update
+- progress reports that do not cite a `plan_step_id`
+- coding against a vague plan with no release slice or locked steps
+- giving critical work to a weak model tier just because it is cheaper or faster
+- retrying the same low-tier worker on a critical blocker instead of escalating
 
 ## Map Rules
 

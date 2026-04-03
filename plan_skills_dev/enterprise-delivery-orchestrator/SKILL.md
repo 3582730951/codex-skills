@@ -63,6 +63,10 @@ Always produce or update these artifacts:
 - `ADR`
 - `API Contract Table`
 - `Function Boundary Table`
+- `Execution Contract`
+- `Capability Routing Table`
+- `Plan Coverage Matrix`
+- `Execution Ledger`
 - `Requirement-to-Change Map`
 - `Test Matrix + Evidence Log`
 - `Threat Review`
@@ -103,6 +107,10 @@ Read only the references needed for the task:
 - [references/project-bootstrap-gates.md](references/project-bootstrap-gates.md): minimum quality gates for brand-new projects
 - [references/repo-discovery-baseline.md](references/repo-discovery-baseline.md): how to build the `Engineering Baseline`
 - [references/artifact-templates.md](references/artifact-templates.md): exact artifact templates and minimum fields
+- [references/plan-completeness-bar.md](references/plan-completeness-bar.md): reject shallow plans before coding
+- [references/execution-discipline.md](references/execution-discipline.md): how to keep implementation aligned to locked plan steps
+- [references/replan-protocol.md](references/replan-protocol.md): when and how to stop and replan
+- [references/capability-routing.md](references/capability-routing.md): which work must use strongest models and strongest reasoning
 - [references/api-contract-bar.md](references/api-contract-bar.md): API and function-boundary rules
 - [references/readability-rubric.md](references/readability-rubric.md): code-quality scoring and veto items
 - [references/anti-laziness.md](references/anti-laziness.md): reject fake progress, hardcoding, and unverifiable claims
@@ -122,7 +130,12 @@ Use the scripts when execution needs repeatable structure:
 
 - `scripts/bootstrap_project.py`: create bounded greenfield scaffolds for supported stacks
 - `scripts/bootstrap_system_tool.py`: create bounded defensive system-tool scaffolds
+- `scripts/generate_execution_control.py`: create the locked execution artifacts
+- `scripts/generate_capability_routing.py`: create the capability-routing artifact
 - `scripts/validate_delivery.py`: validate that artifact bundles satisfy required gates
+- `scripts/score_plan_quality.py`: score whether the plan is complete enough to start coding
+- `scripts/check_capability_routing.py`: verify that critical work is not assigned to weak tiers
+- `scripts/check_execution_alignment.py`: verify that execution stayed aligned to the locked plan
 - `scripts/build_review_package.py`: generate a standard review package markdown file
 - `scripts/capture_ui_evidence.py`: capture desktop/tablet/mobile screenshots plus Lighthouse metrics
 - `scripts/score_code_quality.py`: produce a heuristic code-quality scorecard before manual review
@@ -177,9 +190,26 @@ Do not start implementation until these are defined:
 - owned files and tracks
 - API contracts
 - function boundaries
+- locked plan steps and release slice
 - validation location
 - error semantics
 - tests and review evidence
+
+Before coding on non-trivial work:
+
+1. create or update the `Execution Contract`
+2. create the `Capability Routing Table`
+3. create the `Plan Coverage Matrix`
+4. run `scripts/score_plan_quality.py`
+5. run `scripts/check_capability_routing.py`
+6. do not code if any plan dimension is below `4` or critical work is routed to weak tiers
+
+During implementation:
+
+- update the `Execution Ledger`
+- cite `plan_step_id` and `requirement_id` in progress reasoning
+- escalate critical blockers to strongest model tier instead of looping on weak workers
+- if work drifts outside the locked plan, stop and use [references/replan-protocol.md](references/replan-protocol.md)
 
 ## Approval Rules
 

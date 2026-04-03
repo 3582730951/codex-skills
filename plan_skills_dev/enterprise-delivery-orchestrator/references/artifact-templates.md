@@ -91,6 +91,67 @@ Function Boundary Table:
 - Tests covering it:
 ```
 
+## Execution Contract
+
+```text
+Execution Contract:
+- release_slice:
+- current_gate:
+- plan_lock_version:
+- parallel_tracks:
+- track_owners:
+- ordered_steps:
+  - step_id:
+    summary:
+    entry_gate:
+    exit_evidence:
+- allowed_out_of_plan_work:
+- replan_triggers:
+- blocked_by:
+```
+
+## Capability Routing Table
+
+```text
+Capability Routing Table:
+- work_item_id:
+  work_class:
+  owner_role:
+  required_model_tier:
+  preferred_model:
+  reasoning_effort:
+  downgrade_allowed:
+  escalation_trigger:
+  notes:
+```
+
+## Plan Coverage Matrix
+
+```text
+Plan Coverage Matrix:
+- requirement_id:
+  user_value:
+  plan_step_ids:
+  owner_track:
+  implementation_targets:
+  validation_ids:
+  status:
+```
+
+## Execution Ledger
+
+```text
+Execution Ledger:
+- event_id:
+  plan_step_id:
+  requirement_ids:
+  owner:
+  changed_files_or_symbols:
+  validation_or_reason:
+  result:
+  drift_status:
+```
+
 ## Requirement-to-Change Map
 
 ```text

@@ -185,6 +185,8 @@ Use $enterprise-delivery-orchestrator to take this requirement from clarificatio
 - adds clarification, product definition, API/function contract design, testing evidence, system and UI quality gates, originality checks, and release truthfulness
 - includes repository-aware language adapters for C, C++, Rust, Python, Java, TypeScript, and web frontend work, plus extra controls for kernel/runtime/system-layer work
 - includes runnable helper scripts for greenfield scaffolding, UI evidence capture, code-quality scoring, reviewer package generation, and regulated internal security-product audit/provenance workflows
+- includes locked-plan execution controls to reduce shallow plans and implementation drift
+- includes capability-routing controls to keep critical work on stronger models and stronger reasoning
 
 ## Notes
 

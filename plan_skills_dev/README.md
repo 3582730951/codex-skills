@@ -12,6 +12,8 @@ Delivery-focused Codex skills.
 - includes runnable helper scripts for project bootstrap, UI evidence capture, code-quality scoring, and reviewer package generation
 - includes platform guidance and tooling for authorized defensive system tools on Linux, Windows, and macOS
 - includes audit, authorization, provenance, and internal-source workflows for regulated security products and proprietary protection code
+- includes locked-plan controls so agents have to prove plan completeness and execution alignment
+- includes capability-routing controls so planning, coding, and security review stay on strongest models and strongest reasoning
 
 ## Helper Scripts
 
@@ -19,7 +21,12 @@ Inside `enterprise-delivery-orchestrator/scripts/`:
 
 - `bootstrap_project.py`
 - `bootstrap_system_tool.py`
+- `generate_execution_control.py`
+- `generate_capability_routing.py`
 - `validate_delivery.py`
+- `score_plan_quality.py`
+- `check_capability_routing.py`
+- `check_execution_alignment.py`
 - `build_review_package.py`
 - `capture_ui_evidence.py`
 - `score_code_quality.py`

@@ -21,6 +21,10 @@ Fail immediately if any of these are true:
 - missing `Greenfield Bootstrap Plan` for new projects
 - missing `Architecture Contract` for non-trivial work
 - missing `API Contract Table` or `Function Boundary Table` when boundaries changed
+- missing `Execution Contract`
+- missing `Capability Routing Table`
+- missing `Plan Coverage Matrix`
+- missing `Execution Ledger`
 - missing `Test Matrix + Evidence Log`
 - implementer is the sole approver
 - reviewer relies on another reviewer verdict or implementer summary as primary evidence
@@ -33,6 +37,11 @@ Fail immediately if any of these are true:
 - regulated internal security-product work lacks an `Authorization Manifest`
 - internal source reuse lacks a `Source Provenance Register`
 - sensitive files required for audit lack visible annotations or an `Audit Annotation Register`
+- plan-quality score has any dimension below `4`
+- capability-routing check fails
+- execution-alignment check fails
+- implementation touches surfaces that cannot be mapped to a locked `plan_step_id`
+- critical work is assigned below frontier tier or below high reasoning
 - task claims `3-agent approved` without real independent reviewer evidence
 
 ## Reviewer Matrix
@@ -65,6 +74,8 @@ Approval requires:
 - residual risks and execution gaps stated plainly
 - for defensive system tools: a threat model and permission model
 - for regulated internal security products: authorization, provenance, and audit annotation evidence
+- a locked plan and execution log that can be audited
+- capability routing that matches the criticality of the work
 
 ## Complete Product Gate
 
@@ -94,6 +105,8 @@ In `constrained-single-agent` mode:
 Use:
 
 - `scripts/build_review_package.py` to standardize the package
+- `scripts/generate_execution_control.py` to create the execution lock artifacts
+- `scripts/generate_capability_routing.py` to create the capability-routing artifact
 - `scripts/generate_review_prompts.py` to create independent reviewer asks
 - `scripts/generate_verdict_template.py` to normalize reviewer outputs
 - `scripts/generate_threat_model.py` to create a first-pass threat review
@@ -101,6 +114,9 @@ Use:
 - `scripts/bootstrap_audit_bundle.py` to create the audit and submission artifact set
 - `scripts/register_internal_reference.py` to register proprietary local source as a tracked reference
 - `scripts/scan_audit_annotations.py` to verify required comment tags in sensitive files
+- `scripts/score_plan_quality.py` to reject shallow plans before coding
+- `scripts/check_capability_routing.py` to reject weak routing on critical work
+- `scripts/check_execution_alignment.py` to detect drift from the locked plan
 
 ## Rework Protocol
 

@@ -54,6 +54,8 @@ Outputs:
 - clarified goals, constraints, and acceptance
 - explicit open questions
 - logged assumptions for low-impact gaps only
+- initial `Execution Contract` with a release slice and replan triggers
+- initial `Capability Routing Table`
 
 Block implementation if any unresolved ambiguity can change contracts, security, architecture, or stack choice.
 
@@ -75,6 +77,7 @@ Outputs:
 - `ADR`
 - `API Contract Table`
 - `Function Boundary Table`
+- `Plan Coverage Matrix`
 - file and track ownership
 - audit tag plan for privileged or submission-sensitive files
 
@@ -83,6 +86,7 @@ Outputs:
 Outputs:
 
 - implementation in owned files only
+- updated `Execution Ledger`
 - updated `Requirement-to-Change Map`
 - updated `Claim-to-Evidence Map`
 - executed tests or explicit gaps
@@ -99,6 +103,7 @@ Parallel delivery is allowed only after:
 - contracts are written
 - ownership is explicit
 - merge order is known for shared seams
+- capability routing is locked
 
 ### 7. Independent Review
 
@@ -137,6 +142,7 @@ Requirements:
 - reviewer outputs must be independently attributable
 - reviewers must not see one another's verdicts before submitting their own
 - PM must keep role ownership distinct
+- critical work classes must use frontier routing with high or xhigh reasoning
 
 ### constrained-single-agent
 
@@ -156,6 +162,8 @@ The PM must:
 - stop implementation when gates are missing
 - restate blockers precisely
 - maintain `Decision Log` and `State Snapshot`
+- treat the locked plan as executable control, not background notes
+- route critical work to the strongest available model tier instead of the cheapest available worker
 - refuse false confidence and fake review claims
 - stop regulated work when provenance, authorization, or submission traceability is missing
 
