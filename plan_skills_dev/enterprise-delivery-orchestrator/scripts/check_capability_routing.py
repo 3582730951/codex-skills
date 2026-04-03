@@ -10,6 +10,13 @@ import sys
 from pathlib import Path
 
 
+SECTION_MARKERS = [
+    "Capability Routing Table:",
+    "Delegation Template Table:",
+    "Spawn Agent Template Table:",
+]
+
+
 CRITICAL_CLASSES = {
     "pm_planning",
     "product_definition",
@@ -61,12 +68,20 @@ def collect_text(root: Path) -> str:
     return "\n\n".join(chunks)
 
 
-def parse_entries(text: str) -> list[dict[str, str]]:
-    marker = "Capability Routing Table:"
+def extract_section(text: str, marker: str) -> str:
     start = text.find(marker)
     if start == -1:
+        return ""
+    start += len(marker)
+    next_positions = [text.find(other, start) for other in SECTION_MARKERS if other != marker and text.find(other, start) != -1]
+    end = min(next_positions) if next_positions else len(text)
+    return text[start:end]
+
+
+def parse_entries(text: str) -> list[dict[str, str]]:
+    section = extract_section(text, "Capability Routing Table:")
+    if not section:
         return []
-    section = text[start + len(marker):]
     lines = section.splitlines()
 
     entries: list[dict[str, str]] = []

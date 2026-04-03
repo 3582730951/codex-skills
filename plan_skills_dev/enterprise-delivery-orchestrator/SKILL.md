@@ -115,6 +115,7 @@ Read only the references needed for the task:
 - [references/capability-routing.md](references/capability-routing.md): which work must use strongest models and strongest reasoning
 - [references/escalation-and-delegation.md](references/escalation-and-delegation.md): when to escalate and how to keep reusable spawn templates
 - [references/runtime-spawn-integration.md](references/runtime-spawn-integration.md): how to generate actual runtime-facing `spawn_agent` templates
+- [references/control-entrypoint.md](references/control-entrypoint.md): when to use the unified control entrypoint instead of many manual script calls
 - [references/api-contract-bar.md](references/api-contract-bar.md): API and function-boundary rules
 - [references/readability-rubric.md](references/readability-rubric.md): code-quality scoring and veto items
 - [references/anti-laziness.md](references/anti-laziness.md): reject fake progress, hardcoding, and unverifiable claims
@@ -138,6 +139,7 @@ Use the scripts when execution needs repeatable structure:
 - `scripts/generate_capability_routing.py`: create the capability-routing artifact
 - `scripts/generate_delegation_templates.py`: create reusable role and spawn templates
 - `scripts/generate_spawn_agent_templates.py`: create runtime-facing spawn-agent payload templates
+- `scripts/run_delivery_control.py`: one entrypoint for bootstrap, runtime planning, review bundles, and UI evidence
 - `scripts/validate_delivery.py`: validate that artifact bundles satisfy required gates
 - `scripts/score_plan_quality.py`: score whether the plan is complete enough to start coding
 - `scripts/check_capability_routing.py`: verify that critical work is not assigned to weak tiers
@@ -213,6 +215,13 @@ Before coding on non-trivial work:
 7. run `scripts/check_capability_routing.py`
 8. run `scripts/check_spawn_agent_templates.py`
 9. do not code if any plan dimension is below `4` or critical work is routed to weak tiers
+
+When you need a single command surface instead of many manual steps:
+
+- use `scripts/run_delivery_control.py bootstrap-project` for bounded greenfield setup
+- use `scripts/run_delivery_control.py plan-runtime --run-checks` for locked execution artifacts plus validation
+- use `scripts/run_delivery_control.py review-bundle` for review package plus reviewer prompts and verdict templates
+- use `scripts/run_delivery_control.py capture-ui` for screenshot and Lighthouse evidence
 
 During implementation:
 

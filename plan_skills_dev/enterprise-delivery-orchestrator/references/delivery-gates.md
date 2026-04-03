@@ -112,6 +112,7 @@ Use:
 - `scripts/generate_capability_routing.py` to create the capability-routing artifact
 - `scripts/generate_delegation_templates.py` to create reusable spawn templates
 - `scripts/generate_spawn_agent_templates.py` to create runtime-facing spawn-agent payload templates
+- `scripts/run_delivery_control.py` when you want the bootstrap, planning, review, or UI-evidence chain behind one command surface
 - `scripts/generate_review_prompts.py` to create independent reviewer asks
 - `scripts/generate_verdict_template.py` to normalize reviewer outputs
 - `scripts/generate_threat_model.py` to create a first-pass threat review
